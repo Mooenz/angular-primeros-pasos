@@ -1,0 +1,46 @@
+.box {
+  height: 200px;
+  width: 200px; 
+  background: auto;
+  overflow-y: scroll;
+}
+
+.productos--grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.message-error {
+  background: red;
+  color: white;
+  opacity: 0;
+  transition: all linear .5s;
+
+  &.active {
+    opacity: 1;
+  }
+}
+
+.line-error {
+  height: 0;
+  border-bottom: 1px solid;
+
+  &.invalid{
+    border-color:red;
+  }
+
+  &.valid {
+    border-color: springgreen;
+  }
+}
+
+.container {
+  display: flex;
+  gap: 20px;
+}

@@ -1,0 +1,166 @@
+<h1>Formnularios</h1>
+<form (ngSubmit)="onRegister()" #myForm="ngForm">
+  <div class="input-group">
+    <label for="name">Nombre</label>
+    <input type="text" required id="name" name="name" [(ngModel)]="registro.name" />
+    <p>Mensajes de error</p>
+  </div>
+
+  <div class="input-group">
+    <label for="email">Email</label>
+    <input type="email" required id="email" name="email" [(ngModel)]="registro.email">
+    <p>Mensajes de error</p>
+  </div>
+
+  <div class="input-group">
+    <label for="password">Password</label>
+    <input type="password" required id="password"  name="password" [(ngModel)]="registro.password">
+    <p>Mensajes de error</p>
+  </div>
+  <button [disabled]="myForm.invalid" type="submit">Registrar</button>
+  <button type="button">Accion</button>
+</form>
+<h1>clases y estilos</h1>
+
+<div class="container">
+  <div>
+    <input type="number" [(ngModel)]="box.width" />
+    <input type="number" [(ngModel)]="box.height" />
+    <input type="color" [(ngModel)]="box.bg" />
+  </div>
+  <div>
+    <div
+      [ngStyle]="{
+        'width.px': box.width,
+        'height.px': box.height,
+        'background-color': box.bg,
+        display: 'block'
+      }"
+    ></div>
+  </div>
+</div>
+
+<input type="text" required #nameInput4="ngModel" [(ngModel)]="person.name" />
+<hr
+  class="line-error"
+  [ngClass]="{
+    valid: nameInput4.valid,
+    invalid: nameInput4.invalid
+  }"
+/>
+<p class="message-error" [class.active]="nameInput4.invalid">
+  El campo es requerido
+</p>
+<br />
+<h1>clases y estilos</h1>
+<input type="text" required #nameInput2="ngModel" [(ngModel)]="person.name" />
+<p class="message-error" [class.active]="nameInput2.invalid">
+  El campo es requerido
+</p>
+<label>Nombre</label>
+<input type="text" required #nameInput3="ngModel" [(ngModel)]="person.name" />
+<p [style.font-style]="nameInput3.invalid ? 'italic' : 'normal'">
+  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia blanditiis
+  nisi, provident cum molestias ea!
+</p>
+<div class="container">
+  <div>
+    <input type="text" [(ngModel)]="widthImg" />
+  </div>
+  <div>
+    <img
+      [style.width.%]="widthImg"
+      [src]="person.avatar"
+      alt="img"
+      width="100"
+    />
+  </div>
+</div>
+<br />
+<main>
+  <h1>Cosas Por hacer</h1>
+  <input type="text" [(ngModel)]="toDo" />
+  <button (click)="addToDos(toDo)">Agregar</button>
+  <ol>
+    <li *ngFor="let do of arrToDos">{{ do }}</li>
+  </ol>
+</main>
+<h1>ngSwitch</h1>
+<input type="text" required [(ngModel)]="person.name" />
+<div [ngSwitch]="person.name">
+  <p *ngSwitchCase="'Mooenz'">Hola soy Mooenz</p>
+  <p *ngSwitchCase="'Manuel'">Hola soy Manuel</p>
+  <p *ngSwitchCase="'Jose'">Hola soy Jose</p>
+  <p *ngSwitchDefault>No hace match</p>
+</div>
+<br />
+<h1>*ngFor Objetos</h1>
+<div class="productos--grid">
+  <div *ngFor="let producto of productos">
+    <img width="250px" [src]="producto.image" alt="imagen" />
+    <h2>{{ producto.price }}</h2>
+    <p>{{ producto.name }}</p>
+  </div>
+</div>
+<h1>*ngFor</h1>
+<input type="text" required [(ngModel)]="newName" />
+<button (click)="agregarNombre()">Agregar nombre</button>
+<ul>
+  <li *ngIf="names.length === 0">No hay nombres</li>
+  <li *ngFor="let name of names; index as i">
+    {{ i }} {{ name }}
+    <button (click)="eliminarNombre(i)">Eliminar</button>
+  </li>
+</ul>
+<hr />
+<h1>*ngIf</h1>
+<input type="text" required [(ngModel)]="person.name" />
+<p *ngIf="person.name === 'mooenz'">Soy Mooenz</p>
+<p *ngIf="person.name === 'manu' && person.age === 29; else myBlock">
+  Soy Mannu
+</p>
+<ng-template #myBlock>
+  <p>Bloque de else</p>
+</ng-template>
+<h1>ngModel</h1>
+<p>Nombre = {{ person.name }}</p>
+<input type="text" required #nameInput="ngModel" [(ngModel)]="person.name" />
+<p>Valid {{ nameInput.valid }}</p>
+<p>Edad {{ person.age }}</p>
+<input
+  type="number"
+  max="18"
+  min="10"
+  #ageInput="ngModel"
+  [(ngModel)]="person.age"
+/>
+<p>Valid {{ ageInput.valid }}</p>
+<hr />
+<h1>eventos</h1>
+<button [disabled]="btnDisabled">Hola soy un boton</button>
+<button (click)="toggleButton()">Toggle button</button>
+<p>Edad {{ person.age }}</p>
+<button (click)="plusAge()">+Age</button>
+<button (click)="subtractAge()">-Age</button>
+<div class="box" (scroll)="onScroll($event)">
+  <p>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptas, ipsam.
+    Sed consectetur molestiae a qui autem voluptates voluptatibus temporibus?
+    Numquam voluptate consectetur odio labore nemo optio sapiente, quae velit
+    in.
+  </p>
+</div>
+<p>Nombre = {{ person.name }}</p>
+<input type="text" [value]="person.name" (keyup)="changeName($event)" />
+<hr />
+<h1>Propiedades</h1>
+<button [disabled]="btnDisabled">Hola soy un boton</button>
+<input type="text" [value]="person.name" [id]="person.age" />
+<progress max="100" [value]="person.age"></progress>
+<img [src]="person.avatar" alt="img" width="100" />
+<hr />
+<h1>Hola mundo</h1>
+<h2>{{ "Hola mundo".repeat(2) }}</h2>
+<p>3 + 3 = {{ 3 + 3 }}</p>
+<h3>Hola, soy {{ name }} y tengo {{ projects }} proyectos</h3>
+<img src="{{ img }}" alt="imagen" width="100px" />
